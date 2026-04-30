@@ -14,8 +14,10 @@ public class Main {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             PrintWriter out = new PrintWriter(socket.getOutputStream(),true);
 
-            String message = in.readLine();
-            System.out.println("Client said" + message);
+            String message ;
+            while((message = in.readLine()) != null && !message.isEmpty()){
+            System.out.println(message);
+            }
 
             out.println("Server got the message");
             socket.close();
