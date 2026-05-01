@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 
 public class Client {
     public static void main(String[] args) {
@@ -10,15 +11,37 @@ public class Client {
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
 
-            out.print("GET / HTTP/1.1\r\n");
+            String body = """
+            {
+              "name": "John Doe",
+              "age": 30,
+              "isStudent": false,
+              "courses": ["Math", "Science"],
+              "address": {
+                "city": "New York",
+                "zip": "10001"
+              }
+            }
+            """;
+
+            int contentLength = body.getBytes(StandardCharsets.UTF_8).length;
+
+            out.print("POST / HTTP/1.1\r\n");
             out.print("Host: localhost:9090\r\n");
             out.print("Connection: close\r\n");
+            out.print("Content-Type: application/json\r\n");
+            out.print("Content-Length: " + contentLength + "\r\n");
             out.print("\r\n");
+            out.print(body);
             out.flush();
-
-            String response = in.readLine();
-            System.out.println("Server says: " + response);
-
+            out.flush();
+            socket.shutdownOutput();
+            String response;
+            while ((response = in.readLine()) != null && !response.isEmpty()) {
+                System.out.println("Server says: " + response);
+            }
+            response = in.readLine();
+            System.out.println(response);
             socket.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
