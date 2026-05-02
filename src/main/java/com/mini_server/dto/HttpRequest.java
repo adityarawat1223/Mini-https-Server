@@ -1,4 +1,4 @@
-package dto;
+package com.mini_server.dto;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

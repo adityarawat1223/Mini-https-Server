@@ -1,5 +1,5 @@
-package ParserMethods;
-import dto.HttpRequest;
+package com.mini_server.ParserMethods;
+import com.mini_server.dto.HttpRequest;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -8,13 +8,13 @@ public class ParserFunctions {
     void reqParser(String message, HttpRequest httpRequest) {
         String[] parts = message.split(" ");
         httpRequest.method = parts[0];
-        httpRequest.path = parts[1];
+        httpRequest.path = parts[1].toLowerCase();
         httpRequest.version = parts[2];
     }
     void headerParser(String message, HttpRequest httpRequest) {
         int idx = message.indexOf(":");
-        String key = message.substring(0, idx).trim();
-        String value = message.substring(idx + 1).trim();
+        String key = message.substring(0, idx).trim().toLowerCase();
+        String value = message.substring(idx + 1).trim().toLowerCase();
         httpRequest.headers.put(key, value);
     }
 

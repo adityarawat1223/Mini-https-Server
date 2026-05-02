@@ -1,6 +1,6 @@
-package ParserMethods;
+package com.mini_server.ParserMethods;
 
-import dto.HttpRequest;
+import com.mini_server.dto.HttpRequest;
 
 
 public class ParserChecker {
