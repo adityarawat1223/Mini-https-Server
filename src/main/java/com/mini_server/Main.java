@@ -12,6 +12,7 @@ public class Main {
         ParserChecker parserChecker = new ParserChecker();
         Responder responder = new Responder();
         HandlerMapper handlerMapper = new HandlerMapper();
+        handlerMapper.Adder();
         App app = new App(parserFunctions,parserChecker,responder,handlerMapper);
 
         app.run();

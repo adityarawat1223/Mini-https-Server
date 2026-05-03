@@ -15,20 +15,13 @@ public class Client {
 
             String body = """
             {
-              "name": "John Doe",
-              "age": 30,
-              "isStudent": false,
-              "courses": ["Math", "Science"],
-              "address": {
-                "city": "New York",
-                "zip": "10001"
-              }
+              "msg": "hello"
             }
             """;
 
             int contentLength = body.getBytes(StandardCharsets.UTF_8).length;
 
-            out.print("POST / HTTP/1.1\r\n");
+            out.print("GET /hello HTTP/1.1\r\n");
             out.print("Host: localhost:9090\r\n");
             out.print("Connection: close\r\n");
             out.print("Content-Type: application/json\r\n");

@@ -16,8 +16,93 @@ internals and some http learning
 3. Gradle ( You can use Maven)
 
 ## Working 
-1. Run Main.java
-2. Run Client.Java
+```Bash
+java Main.java
+java Client.java
+```
 
-Currently, There are no Functions Added Inside Handler
-Mapper I add it then I update response and stuff
+## Adding Controllers 
+
+Currently This Project Only Support
+Manual Adding of Controllers Add your Controller
+To Test Controller And Adder to Add them
+
+In MethodClass Directory there is Test Controller
+
+```java
+package com.mini_server.MethodClass;
+
+import com.mini_server.dto.Message;
+// Add Your Controller Here
+public class TestController {
+
+    public String hello() {
+        return "Hello from GET!";
+    }
+
+    public Message echo(Message msg) {
+        return msg;
+    }
+}
+```
+```java
+ public void Adder(){
+    // Add them to Mapper Here
+        try{
+        TestController controller = new TestController();
+        Method getMethod = TestController.class.getMethod("hello");
+        mp.put("GET/hello", new Handler(controller, getMethod));
+
+        Method postMethod = TestController.class.getMethod("echo", Message.class);
+        mp.put("POST/echo", new Handler(controller, postMethod));
+        }
+        catch (Exception e) {
+        throw new RuntimeException(e);
+}
+    };
+```
+
+## Response
+
+Add Request In HTTP protocol in Client.java or
+Checker Will reject it
+```java
+    PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+    BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+
+    String body = """
+            {
+              "msg": "hello"
+            }
+            """;
+
+    int contentLength = body.getBytes(StandardCharsets.UTF_8).length;
+
+    out.print("GET /hello HTTP/1.1\r\n");
+    out.print("Host: localhost:9090\r\n");
+    out.print("Connection: close\r\n");
+    out.print("Content-Type: application/json\r\n");
+    out.print("Content-Length: " + contentLength + "\r\n");
+    out.print("\r\n");
+    out.print(body);
+    out.flush();
+    socket.shutdownOutput();
+```
+
+Response Will be Like this
+ Server Says is Added for Readability ,Server Returns Response
+ in Proper Http Protocol 
+```json
+
+Server says: HTTP/1.1 200 OK
+Server says: Content-Type: application/json
+Server says: Content-Length: 17
+Server says: Connection: close
+"Hello from GET!"
+```
+
+
+## Future Idea
+
+I will add a auto controller Adder in future Maybe
