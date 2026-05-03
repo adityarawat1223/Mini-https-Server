@@ -4,6 +4,7 @@ import com.mini_server.ParserMethods.*;
 import com.mini_server.ReponseMethods.Responder;
 
 
+
 public class Main {
     public static void main(String[] args) {
 
@@ -12,6 +13,7 @@ public class Main {
         Responder responder = new Responder();
         HandlerMapper handlerMapper = new HandlerMapper();
         App app = new App(parserFunctions,parserChecker,responder,handlerMapper);
+
         app.run();
     }
 }
