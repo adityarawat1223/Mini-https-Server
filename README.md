@@ -95,10 +95,10 @@ Response Will be Like this
  in Proper Http Protocol 
 ```json
 
-Server says: HTTP/1.1 200 OK
-Server says: Content-Type: application/json
-Server says: Content-Length: 17
-Server says: Connection: close
+"Server says: HTTP/1.1 200 OK"
+"Server says: Content-Type: application/json"
+"Server says: Content-Length: 17"
+"Server says: Connection: close"
 "Hello from GET!"
 ```
 
